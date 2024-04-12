@@ -1,0 +1,4 @@
+def register_user(username, email, password):
+    cursor.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', (username, email, password))
+    conn.commit()
+    print(f"User {username} registered successfully!")
