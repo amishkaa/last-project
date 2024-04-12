@@ -1,0 +1,17 @@
+import sqlite3
+
+# Подключаемся к базе данных или создаем новую, если она не существует
+conn = sqlite3.connect('user_database.db')
+cursor = conn.cursor()
+
+# Создаем таблицу для пользователей
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY,
+        username TEXT NOT NULL,
+        email TEXT NOT NULL,
+        password TEXT NOT NULL
+    )
+''')
+
+conn.commit()
