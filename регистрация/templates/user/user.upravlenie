@@ -1,0 +1,8 @@
+class UserManager:
+    def __init__(self):
+        self.users = []
+
+    def register_user(self, username, email, password):
+        new_user = User(username, email, password)
+        self.users.append(new_user)
+        return new_user
