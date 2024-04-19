@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Make a Wish</title>
+</head>
+<body>
+    <h1>Make a Wish</h1>
+
+    <form method="POST">
+        <input type="text" name="wish" placeholder="Enter your wish">
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Wishes:</h2>
+    <ul>
+        {% for wish in wishes %}
+            <li>{{ wish }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
