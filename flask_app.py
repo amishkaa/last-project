@@ -69,7 +69,7 @@ def registration():
         db_sess = db_session.create_session()
         u = db_sess.query(User).filter(User.email == form.email.data).first()
         if not u:
-            if form.maniac:
+            if form.maniac.data:
                 return render_template('registration.html', message="Извините, но вы маньяк", form=form)
             user = User()
             user.name = form.username.data
