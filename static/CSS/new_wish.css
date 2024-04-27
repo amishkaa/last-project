@@ -1,9 +1,9 @@
-.wish_title {
+#wish_title {
 max-width: 1000px;
 min-width: 500px;
 }
 
-.text {
+#text {
 max-width: 1000px;
 min-width: 500px;
 height: 390px;

@@ -6,6 +6,7 @@ from data import db_session
 from data.sql_models import User, Wish
 from data.forms.registration_form import RegistrationForm
 from data.forms.login_form import LoginForm
+from data.forms.new_wish_form import NewFishForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -32,18 +33,19 @@ def wishes():
 
 @app.route('/new_wish', methods=['GET', 'POST'])
 def new_wish():
+    form = NewFishForm()
     if not current_user.is_authenticated:
         return redirect('/login')
-    if request.method == 'POST' and not request.form.get('title'):
+    if request.method == 'POST':
         db_sess = db_session.create_session()
         new_wish = Wish()
-        new_wish.title = request.form.get('wish_title')
-        new_wish.text = request.form.get('text')
+        new_wish.title = form.name.data
+        new_wish.text = form.text.data
         new_wish.user_id = current_user.id
         db_sess.add(new_wish)
         db_sess.commit()
         return redirect('/')
-    return render_template('new_wish.html')
+    return render_template('new_wish.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
