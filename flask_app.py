@@ -26,6 +26,11 @@ def wishes():
     if not current_user.is_authenticated:
         return redirect('/login')
     db_sess = db_session.create_session()
+    if request.method == 'POST' and request.form.get('fulfill_wish'):
+        wish = db_sess.query(Wish).filter(Wish.id == request.form.get('fulfill_wish')).first()
+        if wish is not None:
+            db_sess.delete(wish)
+            db_sess.commit()
     users = sorted(db_sess.query(User.id, User.email, User.name).all(), key=lambda user: user.id)
     wishes = db_sess.query(Wish).all()
     return render_template('wishes.html', profile_name=current_user.name, wishes=wishes, users=users)
@@ -33,9 +38,9 @@ def wishes():
 
 @app.route('/new_wish', methods=['GET', 'POST'])
 def new_wish():
-    form = NewFishForm()
     if not current_user.is_authenticated:
         return redirect('/login')
+    form = NewFishForm()
     if request.method == 'POST':
         db_sess = db_session.create_session()
         new_wish = Wish()

@@ -9,3 +9,7 @@
 #email {
     color: #187CFF;
 }
+
+.form-control {
+    max-width: 300px;
+}
