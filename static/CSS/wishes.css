@@ -10,6 +10,10 @@
     color: #187CFF;
 }
 
+#text {
+    max-width: 1000px;
+}
+
 .form-control {
     max-width: 300px;
 }

@@ -41,7 +41,7 @@
         <li>
             <p><b id="title">{{ wish.title }}</b> / <b id="name">{{ users[wish.user_id - 1].name }}</b> / <b
                     id="email">{{ users[wish.user_id - 1].email }}</b></p>
-            <p id="text">{{ wish.text }}</p>
+            <div id="text" class="form-control" contenteditable="true"> {{ wish.text }}</div>
             <form action="/" method="POST">
                 <button name="fulfill_wish" class="form-control" type="submit" value="{{ wish.id }}">Исполнить</button>
             </form>

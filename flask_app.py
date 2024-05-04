@@ -60,11 +60,19 @@ def login():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == form.email.data).first()
         password_h = sha256(form.password.data.encode()).hexdigest()
-        if user and user.check(password_h, form.email.data, form.username.data):
+        if user:
+            if user.hashed_password != password_h:
+                return render_template('login.html',
+                                       message="Неверный пароль",
+                                       form=form)
+            if user.name != form.username.data:
+                return render_template('login.html',
+                                       message="Неверное имя",
+                                       form=form)
             login_user(user)
             return redirect("/")
         return render_template('login.html',
-                               message="Неверная информация",
+                               message="Неверная почта",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 

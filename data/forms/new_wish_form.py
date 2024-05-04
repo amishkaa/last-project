@@ -1,9 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, TextAreaField, validators
 
 
 class NewFishForm(FlaskForm):
-    name = StringField('Название', validators=[DataRequired()])
-    text = TextAreaField('Содержание', validators=[DataRequired()])
+    name = StringField('Название', validators=[validators.Length(min=3, max=20)])
+    text = TextAreaField('Содержание', validators=[validators.Length(min=20, max=1500)])
     submit = SubmitField('Отправить желание')
