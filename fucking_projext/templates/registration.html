@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link
+        rel="stylesheet"
+        href="static/css/registration.css"
+>
+<h1>Регистрация</h1>
+<p>Все поля обязательны к заполнению</p>
+<form action="" method="post">
+    {% if form.errors %}
+    {{ form.errors }}
+    {% endif %}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(class="form-control") }}<br>
+        {% for error in form.username.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(class="form-control", type="email") }}<br>
+        {% for error in form.email.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(class="form-control", type="password") }}<br>
+        {% for error in form.password.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.maniac(class="is_maniac") }} {{ form.maniac.label }}
+        {{ form.submit(type="submit", class="btn btn-primary") }}<br>
+    </p>
+    <div id="message">{{ message }}</div>
+</form>
+{% endblock %}
